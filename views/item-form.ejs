@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">PULSE TECH ⚡</a>
+    <nav>
+      <a href="/">Inventory</a>
+      <a href="/categories">Categories</a>
+      <a href="/items/new" class="btn active" style="padding: 0.5rem 1rem; color: #fff; margin-left: 1rem;">+ Add Hardware</a>
+    </nav>
+  </header>
+
+  <div class="hero-box" style="text-align: center; padding: 2rem;">
+    <h1>Register New Hardware</h1>
+    <p>Add a new unit to the Pulse Tech warehouse database.</p>
+  </div>
+
+  <% if (locals.errors && errors.length > 0) { %>
+    <ul class="error-list">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <form action="/items/new" method="POST" class="styled-form">
+    <div class="form-group">
+      <label for="name">Item Name</label>
+      <input type="text" id="name" name="name" value="<%= locals.oldInput ? oldInput.name : '' %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="category_id">Category Sector</label>
+      <select id="category_id" name="category_id" required>
+        <option value="" disabled selected>Select a category...</option>
+        <% categories.forEach(cat => { %>
+          <option value="<%= cat.id %>" <%= locals.oldInput && oldInput.category_id == cat.id ? 'selected' : '' %>>
+            <%= cat.name %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <div class="form-group">
+        <label for="price">Price ($)</label>
+        <input type="number" step="0.01" id="price" name="price" value="<%= locals.oldInput ? oldInput.price : '' %>" required>
+      </div>
+      <div class="form-group">
+        <label for="stock_quantity">Stock Quantity</label>
+        <input type="number" id="stock_quantity" name="stock_quantity" value="<%= locals.oldInput ? oldInput.stock_quantity : '' %>" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="specs">Technical Specs / Highlights</label>
+      <input type="text" id="specs" name="specs" placeholder="e.g. 32GB RAM, Titanium Build" value="<%= locals.oldInput ? oldInput.specs : '' %>">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="3"><%= locals.oldInput ? oldInput.description : '' %></textarea>
+    </div>
+
+    <button type="submit" class="btn" style="width: 100%;">Deploy Item to Warehouse</button>
+  </form>
+
+</body>
+</html>

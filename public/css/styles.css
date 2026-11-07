@@ -1,0 +1,217 @@
+:root {
+  --bg-color: #f4f0ec;
+  --card-bg: #e8e3dd;
+  --card-hover: #dfdad5;
+  --text-main: #2c2421;
+  --text-muted: #756a64;
+  --accent-gold: #c88a42;
+  --accent-gold-hover: #b47938;
+  --danger: #b24c3d;
+  --border-color: #d6cfc7;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header & Nav */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-bg);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 12px rgba(44, 36, 33, 0.05);
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav a:hover, nav a.active {
+  color: var(--accent-gold);
+}
+
+/* Page Title & Hero Box */
+.hero-box {
+  background: linear-gradient(135deg, #e8e3dd 0%, #ded7ce 100%);
+  padding: 3rem;
+  border-radius: 24px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px rgba(44, 36, 33, 0.04);
+}
+
+.hero-box h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 0.5rem;
+}
+
+.hero-box p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+/* Grid Layouts */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 18px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s, background-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  background-color: var(--card-hover);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card .tag {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-gold);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.05rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.stock-badge {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+
+/* Buttons */
+.btn {
+  background-color: var(--accent-gold);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--accent-gold-hover);
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  border-radius: 20px;
+}
+
+.btn-danger:hover {
+  background-color: var(--danger);
+  color: #fff;
+}
+
+/* Forms */
+form.styled-form {
+  background-color: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+.error-list {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  list-style-position: inside;
+}

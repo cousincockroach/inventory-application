@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">PULSE TECH </a>
+    <nav>
+      <a href="/">Inventory</a>
+      <a href="/categories" class="active">Categories</a>
+      <a href="/items/new" class="btn" style="padding: 0.5rem 1rem; color: #fff; margin-left: 1rem;">+ Add Hardware</a>
+    </nav>
+  </header>
+
+  <div class="hero-box">
+    <h1>Warehouse Categories</h1>
+    <p>Organize your hardware distribution sectors.</p>
+  </div>
+
+  <% if (locals.errors && errors.length > 0) { %>
+    <ul class="error-list">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start;">
+    
+    <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); margin-bottom: 0;">
+      <% categories.forEach(cat => { %>
+        <div class="card" style="cursor: pointer;" onclick="window.location.href='/categories/<%= cat.id %>'">
+          <div>
+            <span class="tag">Sector</span>
+            <h3><%= cat.name %></h3>
+            <p><%= cat.description %></p>
+          </div>
+          <div style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600; margin-top: 1rem;">
+            View Inventory →
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <form action="/categories" method="POST" class="styled-form" style="margin: 0; width: 100%;">
+      <h3 style="margin-bottom: 1.25rem;">New Category</h3>
+      <div class="form-group">
+        <label for="name">Category Name</label>
+        <input type="text" id="name" name="name" value="<%= locals.oldInput ? oldInput.name : '' %>" required>
+      </div>
+      <div class="form-group">
+        <label for="tagline">Tagline</label>
+        <input type="text" id="tagline" name="tagline" value="<%= locals.oldInput ? oldInput.tagline : '' %>">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="3"><%= locals.oldInput ? oldInput.description : '' %></textarea>
+      </div>
+      <button type="submit" class="btn" style="width: 100%;">Create Category</button>
+    </form>
+
+  </div>
+
+</body>
+</html>

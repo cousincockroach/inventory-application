@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">PULSE TECH ⚡</a>
+    <nav>
+      <a href="/">Inventory</a>
+      <a href="/categories" class="active">Categories</a>
+      <a href="/items/new" class="btn" style="padding: 0.5rem 1rem; color: #fff; margin-left: 1rem;">+ Add Hardware</a>
+    </nav>
+  </header>
+
+  <div class="hero-box">
+    <span class="tag"><%= category.tagline || 'Sector Details' %></span>
+    <h1><%= category.name %></h1>
+    <p><%= category.description %></p>
+  </div>
+
+  <h2>Items in this Category (<%= items.length %>)</h2>
+  <br>
+
+  <div class="grid">
+    <% if (items.length === 0) { %>
+      <p style="color: var(--text-muted);">No hardware items currently registered in this category.</p>
+    <% } else { %>
+      <% items.forEach(item => { %>
+        <div class="card">
+          <div>
+            <h3><%= item.name %></h3>
+            <p><%= item.description %></p>
+            <% if (item.specs) { %>
+              <p style="font-size: 0.85rem; color: var(--accent-gold);"><strong>Specs:</strong> <%= item.specs %></p>
+            <% } %>
+          </div>
+          <div>
+            <div class="meta-row" style="margin-bottom: 1rem;">
+              <span>$<%= Number(item.price).toFixed(2) %></span>
+              <span class="stock-badge"><%= item.stock_quantity %> in stock</span>
+            </div>
+            <form action="/items/<%= item.id %>/delete" method="POST" style="text-align: right;">
+              <button type="submit" class="btn btn-danger">Decommission</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+
+  <div style="margin-top: 2rem;">
+    <a href="/categories" style="color: var(--text-main); text-decoration: none; font-weight: 600;">← Back to Categories</a>
+  </div>
+
+</body>
+</html>

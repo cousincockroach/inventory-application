@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">PULSE TECH </a>
+    <nav>
+      <a href="/" class="active">Inventory</a>
+      <a href="/categories">Categories</a>
+      <a href="/items/new" class="btn" style="padding: 0.5rem 1rem; color: #fff; margin-left: 1rem;">+ Add Hardware</a>
+    </nav>
+  </header>
+
+  <div class="hero-box">
+    <h1>Hardware Inventory</h1>
+    <p>Real-time tracking for next-generation tech modules, components, and studio gear.</p>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <h2>All Active Stock (<%= items.length %>)</h2>
+  </div>
+
+  <div class="grid">
+    <% items.forEach(item => { %>
+      <div class="card">
+        <div>
+          <span class="tag"><%= item.category_name %></span>
+          <h3><%= item.name %></h3>
+          <p><%= item.description %></p>
+          <% if (item.specs) { %>
+            <p style="font-size: 0.85rem; color: var(--accent-gold);"><strong>Specs:</strong> <%= item.specs %></p>
+          <% } %>
+        </div>
+        <div>
+          <div class="meta-row" style="margin-bottom: 1rem;">
+            <span>R<%= Number(item.price).toFixed(2) %></span>
+            <span class="stock-badge"><%= item.stock_quantity %> in stock</span>
+          </div>
+          <form action="/items/<%= item.id %>/delete" method="POST" style="text-align: right;">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to decommission this item?')">Decommission</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+</body>
+</html>
